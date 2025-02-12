@@ -1,0 +1,33 @@
+[tool.poetry]
+    name = "api-2"
+    version = "0.1.0"
+    description = ""
+    authors = ["1chavez1 <bryaanchavez1@gmail.com>"]
+
+    [tool.poetry.dependencies]
+        python = "^3.10"
+        flask = "^3.1.0"
+        pydantic-settings = "^2.7.1"
+        gunicorn = "^23.0.0"
+        scikit-learn = "1.6.0"
+        flake8 = "^7.1.1"
+        loguru = "^0.7.3"
+        torch = { version = "2.5.0", source = "pytorch-cpu", markers = "extra=='cpu' and extra!='cuda'" }
+
+    [tool.poetry.extras]
+        cpu  = ["torch"]
+
+
+[[tool.poetry.packages]]
+    include = "app"
+
+
+[[tool.poetry.source]]
+    name = "pytorch-cpu"
+    priority = "explicit"
+    url = "https://download.pytorch.org/whl/cpu"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
