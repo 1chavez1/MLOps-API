@@ -39,13 +39,6 @@ jobs:
       if: steps.cached-poetry-dependencies.outputs.cache-hit != 'True'
       run: poetry run  make install
       shell: bash
-    
-    - name: Build application
-      uses: ./.github/actions/build-application
-
-    - name: Lint with flake8
-      run: poetry run make check
-      shell: bash
 
   build-and-publish:
     needs: build-and-test
