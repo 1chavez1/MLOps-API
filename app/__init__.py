@@ -22,6 +22,5 @@ def create_app():
 
     from app.api import bp
     app.register_blueprint(bp, url_prefix="/api")
-    print(app.url_map)
 
     return app
