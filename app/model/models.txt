@@ -1,0 +1,5 @@
+In the first step, we create a dedicated sentiment analysis file (PyTorch file as torch.jit) using our own methods.
+We start by collecting data through web scraping. This data is then cleaned and preprocessed using an ETL (Extract, Transform, Load),
+process to ensure its consistency and quality. 
+After cleaning, we apply a vectorizer to convert the text into numerical representations,
+which are then used by the prediction function to perform sentiment analysis.
