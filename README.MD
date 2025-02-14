@@ -1,112 +1,114 @@
-# API de Análisis de Sentimientos con Flask
+# Flask Sentiment Analysis API
 
-## Descripción del Proyecto
-Este proyecto tiene como objetivo desarrollar una API utilizando Flask para realizar inferencia con un modelo de análisis de sentimientos proporcionado por otro equipo de trabajo encargado de la creación y entrenamiento de modelos (Model Building). Este sistema está diseñado para acelerar el proceso de análisis de las reseñas de productos, optimizando la capacidad de la empresa para tomar decisiones basadas en los comentarios de los clientes.
+## Project Description
+This project aims to develop an API using Flask to perform inference part with a model of analysis of feelings provided by another team responsible for the creation and training of models (Model Building). This system is designed to speed up the process of analyzing product reviews, optimizing the company’s ability to make decisions based on customer feedback.
 
-## Contexto
-En este flujo de trabajo, el equipo de Model Building entrena y ajusta un modelo de machine learning especializado para el análisis de sentimientos. Una vez entrenado, el modelo es entregado al equipo de Model Inference para integrarlo en un entorno productivo a través de una API. Este proyecto aborda esa segunda etapa, proporcionando una solución escalable, eficiente y fácil de usar para consumir predicciones del modelo.
+## Context
+In this workflow, the model building team trains and adjusts specialized ML model for sentiment analysis. Once trained, the model is given to the model inference team to integrate at production environment through API. Providing scalable, efficient and user-friendly solutions to use for predictions.
 
-## Consideraciones de diseño
-Este proyecto está diseñado como un prototipo funcional para demostrar habilidades técnicas en un entorno controlado. Actualmente, la API es sincrónica, lo que es adecuado para un único usuario que realiza solicitudes de análisis de sentimientos.
+## Design Considerations
+This project is designed as a functional prototype to demonstrate technical skills in a controlled environment. Currently, the API is synchronous, which is suitable for a single user who makes requests for sentiment analysis.
 
-En un entorno de producción con múltiples usuarios o altos volúmenes de solicitudes, se recomienda implementar una arquitectura asíncrona
+In a production environment with multiple users or high volumes of requests, it is recommended to implement an asynchronous architecture.
 
-## Características del Proyecto
-1. **API RESTful**: Diseñada con Flask, siguiendo buenas prácticas de desarrollo de software para garantizar escalabilidad y mantenibilidad.
-2. **Predicciones en Tiempo Real**: Permite realizar análisis de sentimiento de las reseñas de productos en tiempo real.
-3. **Flexibilidad y Extensibilidad**: El sistema está diseñado para ser modular, facilitando la integración de nuevos modelos en el futuro.
-4. **Optimizado para Producción**: Se consideran principios de MLOps, como la gestión de versiones del modelo, manejo de errores y logging.
+## Characteristics of the Project
+1. **RESTful API**: Designed with Flask, following good software development practices to ensure scalability and maintainability.
+2. **Real-time predictions**: Allows for real-time sentiment analysis of product reviews.
+3. **Flexibility and Extensibility**: The system is designed to be modular, facilitating the integration of new models in the future.
+4. **Optimized for Production**: MLOps principles such as model version management, error handling and logging are considered.
 
-## Tecnologías Utilizadas
-- **Flask**: Framework principal para la creación de la API.
-- **Pydantic**: Validación y serialización de datos para garantizar entradas seguras.
-- **PyTorch**: Herramienta utilizada para cargar el modelo preentrenado.
-- **Docker**: Para contenerizar la aplicación y facilitar su despliegue.
-- **Postman**: Para pruebas y validación de los endpoints de la API.
+## Technologies
+- **Flask**:  Main framework for the creation of the API.
+- **Pydantic**: Validation and serialization of data to ensure secure entries.
+- **PyTorch**: Tool used to load the pre-trained model.
+- **Docker**: To contain the application and facilitate its deployment.
+- **Postman**: For testing and validation of API endpoints.
 
 ## Estructura del Proyecto
 ```
+|-- .github/
+|   |-- ci/cd.yml            # GitHub Actions CI/CD
+|
 |-- app/
-|   |-- run.py        # Código de la API (Flask).
+|   |-- run.py               # API Code(Flask).
 |   |
 |   |-- api/
-|   |   |-- prediction.py # Codigo de blueprint
+|   |   |-- prediction.py    # Blueprint Code.
 |   |  
 |   |-- config/
-|   |   |-- __init__.py      # Inicializador de configuración.
-|   |   |-- .env             # Variables de entorno.
-|   |   |-- model.py         # Configuración del modelo.
+|   |   |-- __init__.py      # Init Config.
+|   |   |-- .env             # Enviroments varaibles.
+|   |   |-- model.py         # Model Configuration.
 |   |
 |   |-- model/
-|   |   |-- Sentiment_model_complete.pth  # Modelo entrenado.
-|   |   |-- vectorizer.pkl               # Vectorizador de texto.
-|   |
+|   |   |-- Sentiment_model_complete.pth  # Trained Model.
+|   |   |-- vectorizer.pkl                # Text vectorizer.
+|   |                     # You need to create these files on your own.
 |   |-- schema/
-|   |   |-- review_analysis.py   # Esquema Pydantic.
+|   |   |-- review_analysis.py   # Pydantic Schema.
 |   |
 |   |-- services/
 |   |   |-- __init__.py
-|   |   |-- model_inference.py  # Inferencia del modelo.
+|   |   |-- model_inference.py  # Model inference.
 |
-|-- Dockerfile              # Archivo de configuración para Docker.
-|-- Makefile                # Archivo para automatización
-|-- poetry.lock             # Lockfile de Poetry.
-|-- pyproject.toml          # Archivo principal de Poetry.
-|-- README.md               # Documentación del proyecto.
-|-- setup.cfg               # Configuración adicional de Python.
+|-- Dockerfile              # File to contain the application.
+|-- Makefile                # Archive for automation.
+|-- poetry.lock             # Lockfile Poetry.
+|-- pyproject.toml          # Project dependencies.
+|-- README.md               # Project documentation.
+|-- setup.cfg               # Additional Python configuration.
 ```
-- **app/**: Contiene el código principal de la API.
-- **Dockerfile**: Archivo para contenerizar la aplicación.
-- **pyproject.toml**: Dependencias del proyecto.
-- **README.md**: Documentación del proyecto.
+- **app/**: Contains the main API code.
+- **Dockerfile**: File to contain the application.
+- **pyproject.toml**: Project dependencies.
+- **README.md**: Project documentation.
 
-## Instalación y Ejecución
-### Requisitos Previos
+## Installation and Execution
+### Prerequisites
 - Python 3.10+
-- Docker (opcional, para despliegue)
+- Docker (optional, for deployment)
 
-### Pasos para Ejecutar Localmente
-1. Clona este repositorio:
+### Steps to Run Locally
+1. Clone this repository:
    ```bash
    git clone https://github.com/1chavez1/MLOps-API.git
    cd project
    ```
 
-2. Instala las dependencias:
-Se recomienda utilizar un entorno virtual para aislar el proyecto. Si estás gestionando las dependencias con `Poetry`, sigue estos pasos:
-Ejecuta el siguiente comando para instalar todas las dependencias definidas en el archivo `pyproject.toml`:
+2. Install dependencies:
+It is recommended to use a virtual environment to isolate the project. If you are managing dependencies with `Poetry`, follow these steps:
+Run the following command to install all dependencies defined in the `pyproject.toml` file:
   ```bash
   poetry install
 ```
 
-3. Ejecuta la aplicación:
+3. Run the application:
    ```bash
    poetry run python app/run.py
    ```
 
-4. Accede a la API en `http://localhost:5000`
-Esta API tiene expuesto el puerto 8080 para uso de Google Cloud Run, cambia este puerto por 5000 para pruebas unitarias.
+4. Access the API at `http://localhost:5000`
+This API has port 8080 exposed for use with Google Cloud Run, change this port to 5000 for unit testing.
 
-### Uso de Docker
-1. Construye la imagen de Docker:
+### Using Docker
+1. Build the Docker image:
    ```bash
    docker build -t sentiment-analysis-api .
    ```
 
-2. Ejecuta el contenedor:
+2. Runs the container:
    ```bash
    docker run -p 5000:5000 sentiment-analysis-api
    ```
 
 ## Endpoints
 ### POST `/api/prediction`
-Realiza el análisis de sentimiento de una lista de reseñas.
 
 #### Request
 ```json
 {
   "review": [
-    "Este producto es increíble! Me encanta."
+    "This product is amazing! I love it."
   ]
 }
 ```
@@ -115,7 +117,7 @@ Realiza el análisis de sentimiento de una lista de reseñas.
 ```json
 {
   "Predicted Sentiments": [
-    {"review_text": "Este producto es increíble! Me encanta.", "sentiment": "positivo"}
+    {"review_text": "This product is amazing! I love it.", "sentiment": "positivo"}
   ]
 }
 ```
